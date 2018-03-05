@@ -1,5 +1,8 @@
 package main;
 
+import java.awt.List;
+import java.util.ArrayList;
+
 import javafx.application.*;
 import javafx.event.*;
 import javafx.scene.*;
@@ -26,6 +29,8 @@ public class Demo extends Application {
 	@Override
 	public void start(Stage stage) throws Exception {
 		stage.setTitle("Demo");
+		
+		ArrayList<Shape3D> shapes = new ArrayList<>();
 		
 		// initialize border pane
 		BorderPane borderPane = new BorderPane();
@@ -133,7 +138,13 @@ public class Demo extends Application {
 				object.setTranslateY(0);
 				object.setTranslateZ(0);
 				
-				borderPane.setCenter(object);
+				shapes.add(object);
+				HBox box = new HBox();
+				box.setAlignment(Pos.CENTER);
+				for(int i = 0; i < shapes.size(); i++) {
+					box.getChildren().add( shapes.get(i));
+				}
+				borderPane.setCenter(box);
 			}
 			
 		});
