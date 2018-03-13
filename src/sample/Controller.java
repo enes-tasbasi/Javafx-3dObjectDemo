@@ -1,6 +1,7 @@
 package sample;
 
 import javafx.fxml.FXML;
+import javafx.scene.Cursor;
 import javafx.scene.PointLight;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseButton;
@@ -13,6 +14,7 @@ import javafx.scene.shape.Box;
 import javafx.scene.shape.Cylinder;
 import javafx.scene.shape.Shape3D;
 import javafx.scene.shape.Sphere;
+import javafx.scene.transform.Rotate;
 
 import java.util.ArrayList;
 
@@ -60,7 +62,26 @@ public class Controller {
 
         rotateMenuItem = new MenuItem("Rotate");
         rotateMenuItem.setOnAction(e -> {
+            TextField rotateTextField = new TextField();
+            rotateTextField.setPromptText("Degrees");
+            GridPane.setConstraints(rotateTextField, 0, 8);
 
+            Button setRotationButton = new Button("Rotate");
+            GridPane.setConstraints(setRotationButton, 0, 9);
+            setRotationButton.setOnAction(event -> {
+                if (! (Integer.parseInt(rotateTextField.getText()) > 50 || Integer.parseInt(rotateTextField.getText()) < -50)) {
+                    try {
+                        currentRightClick.getTransforms().add(new Rotate(Integer.parseInt(rotateTextField.getText()), 0, 0, 0));
+                    } catch (NumberFormatException e1) {
+                        e1.printStackTrace();
+                    }
+                }
+
+                gridPane.getChildren().removeAll(rotateTextField, setRotationButton);
+
+            });
+
+            gridPane.getChildren().addAll(rotateTextField, setRotationButton);
         });
 
         deleteMenuItem = new MenuItem("Delete");
@@ -123,15 +144,13 @@ public class Controller {
         }
 
 
-
-
         if(shapeComboBox.getValue() != null) {
             if(colorComboBox.getValue() != null) {
                 assert object != null;
                 object.setMaterial(material);
             }
 
-           // object.setCursor(Cursor.HAND);
+            object.setCursor(Cursor.HAND);
 
             Shape3D finalObject = object;
             object.setOnMouseDragged(event -> {
@@ -151,10 +170,6 @@ public class Controller {
 
 
             shapes.add(object);
-
-            for(int i = 0; i < shapes.size(); i++) {
-               // System.out.println(shapes.get(i).getTranslateX());
-            }
 
             stackPane.getChildren().add(object);
         }

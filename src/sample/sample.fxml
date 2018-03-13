@@ -16,10 +16,10 @@
 
 <?import javafx.scene.layout.StackPane?>
 
-<BorderPane stylesheets="main.css" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+<BorderPane stylesheets="@main.css" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
     <left>
         <GridPane fx:id="gridPane" prefHeight="400.0" prefWidth="173.0" vgap="10.0">
-            <ComboBox fx:id="shapeComboBox" onAction="#getShape" promptText="Select Shape" GridPane.halignment="CENTER">
+            <ComboBox fx:id="shapeComboBox" onAction="#getShape" promptText="Select Shape" GridPane.halignment="CENTER" minWidth="150">
                 <items>
                     <FXCollections fx:factory="observableArrayList">
                         <String fx:value="Sphere" />
@@ -31,7 +31,7 @@
             <TextField fx:id="tf1" text="100" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
             <TextField fx:id="tf2" text="100" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
             <TextField fx:id="tf3" text="100" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
-            <ComboBox fx:id="colorComboBox" promptText="Select Color" GridPane.halignment="CENTER" GridPane.rowIndex="4">
+            <ComboBox fx:id="colorComboBox" promptText="Select Color" GridPane.halignment="CENTER" GridPane.rowIndex="4" minWidth="150">
                 <items>
                     <FXCollections fx:factory="observableArrayList">
                         <String fx:value="Red" />

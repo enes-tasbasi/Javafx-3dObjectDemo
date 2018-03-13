@@ -23,7 +23,14 @@ public class Main extends Application {
 
         myController.initialize();
 
+        PerspectiveCamera camera = new PerspectiveCamera(false);
 
+        camera.setTranslateZ(-1);
+        camera.setNearClip(0.1);
+        camera.setFarClip(2000.0);
+        camera.setFieldOfView(30);
+
+        scene.setCamera(camera);
         scene.getStylesheets().add("/sample/main.css");
         primaryStage.setScene(scene);
         primaryStage.setMaximized(true);
