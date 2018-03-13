@@ -14,7 +14,9 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
+<?import javafx.scene.layout.StackPane?>
+
+<BorderPane stylesheets="main.css" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.Controller">
     <left>
         <GridPane fx:id="gridPane" prefHeight="400.0" prefWidth="173.0" vgap="10.0">
             <ComboBox fx:id="shapeComboBox" onAction="#getShape" promptText="Select Shape" GridPane.halignment="CENTER">
@@ -26,9 +28,9 @@
                     </FXCollections>
                 </items>
             </ComboBox>
-         <TextField fx:id="tf1" text="100" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
-         <TextField fx:id="tf2" text="100" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
-         <TextField fx:id="tf3" text="100" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
+            <TextField fx:id="tf1" text="100" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+            <TextField fx:id="tf2" text="100" GridPane.halignment="CENTER" GridPane.rowIndex="2" />
+            <TextField fx:id="tf3" text="100" GridPane.halignment="CENTER" GridPane.rowIndex="3" />
             <ComboBox fx:id="colorComboBox" promptText="Select Color" GridPane.halignment="CENTER" GridPane.rowIndex="4">
                 <items>
                     <FXCollections fx:factory="observableArrayList">
@@ -40,27 +42,27 @@
                     </FXCollections>
                 </items>
             </ComboBox>
-            <Button fx:id="addButton" onAction="#addShape" text="Add Shape" GridPane.halignment="CENTER" GridPane.rowIndex="5" />
-         <padding>
-            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-         </padding>
-         <columnConstraints>
-            <ColumnConstraints />
-         </columnConstraints>
-         <rowConstraints>
-            <RowConstraints />
-            <RowConstraints />
-            <RowConstraints />
-            <RowConstraints />
-            <RowConstraints />
-            <RowConstraints />
-         </rowConstraints>
+            <Button styleClass="primary" fx:id="addButton" onAction="#addShape" text="Add Shape" GridPane.halignment="CENTER" GridPane.rowIndex="5" />
+            <padding>
+                <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+            </padding>
+            <columnConstraints>
+                <ColumnConstraints />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints />
+                <RowConstraints />
+                <RowConstraints />
+                <RowConstraints />
+                <RowConstraints />
+                <RowConstraints />
+            </rowConstraints>
 
         </GridPane>
     </left>
     <center>
-        <HBox fx:id="hbox" alignment="CENTER" spacing="10.0" BorderPane.alignment="CENTER">
+        <StackPane fx:id="stackPane" alignment="CENTER" BorderPane.alignment="CENTER">
 
-        </HBox>
+        </StackPane>
     </center>
 </BorderPane>

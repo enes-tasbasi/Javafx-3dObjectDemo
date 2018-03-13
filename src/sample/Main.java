@@ -2,9 +2,12 @@ package sample;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
+import javafx.scene.*;
+import javafx.scene.effect.Light;
+import javafx.scene.effect.Lighting;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import javafx.scene.transform.Translate;
 
 public class Main extends Application {
 
@@ -19,6 +22,7 @@ public class Main extends Application {
         Scene scene = new Scene(root);
 
         myController.initialize();
+
 
         scene.getStylesheets().add("/sample/main.css");
         primaryStage.setScene(scene);

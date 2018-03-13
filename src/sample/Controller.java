@@ -1,12 +1,12 @@
 package sample;
 
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.scene.Cursor;
+import javafx.scene.PointLight;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.PhongMaterial;
 import javafx.scene.shape.Box;
@@ -14,7 +14,6 @@ import javafx.scene.shape.Cylinder;
 import javafx.scene.shape.Shape3D;
 import javafx.scene.shape.Sphere;
 
-import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
 
@@ -35,9 +34,19 @@ public class Controller {
     @FXML
     public GridPane gridPane;
 
+    @FXML
+    public StackPane stackPane;
+
+    public MenuItem rotateMenuItem;
+
+    public MenuItem deleteMenuItem;
+
+    public Shape3D currentRightClick;
+
     private ArrayList<Shape3D> shapes = new ArrayList<>();
 
     private ContextMenu contextMenu;
+
 
     public void initialize() {
         tf1.setVisible(false);
@@ -49,9 +58,21 @@ public class Controller {
 
         contextMenu = new ContextMenu();
 
-        MenuItem moveMenuItem = new MenuItem("Move");
-        MenuItem deleteMenuItem = new MenuItem("Delete");
-        contextMenu.getItems().addAll(moveMenuItem, deleteMenuItem);
+        rotateMenuItem = new MenuItem("Rotate");
+        rotateMenuItem.setOnAction(e -> {
+
+        });
+
+        deleteMenuItem = new MenuItem("Delete");
+        deleteMenuItem.setOnAction(event -> {
+
+            stackPane.getChildren().remove(currentRightClick);
+
+        });
+
+        contextMenu.getItems().addAll(rotateMenuItem, deleteMenuItem);
+
+
     }
 
     public void addShape(){
@@ -110,16 +131,32 @@ public class Controller {
                 object.setMaterial(material);
             }
 
-            object.setCursor(Cursor.HAND);
+           // object.setCursor(Cursor.HAND);
 
             Shape3D finalObject = object;
             object.setOnMouseDragged(event -> {
-                finalObject.setTranslateX(finalObject.getTranslateX() +event.getX());
-                finalObject.setTranslateY(finalObject.getTranslateY() +event.getY());
+                if(event.getButton() == MouseButton.PRIMARY) {
+                    finalObject.setTranslateX(finalObject.getTranslateX() + event.getX());
+                    finalObject.setTranslateY(finalObject.getTranslateY() + event.getY());
+                }
             });
 
+            object.setOnMouseClicked(e -> {
+                if(e.getButton() == MouseButton.SECONDARY) {
+                   contextMenu.show(finalObject, e.getScreenX(), e.getScreenY());
+                   currentRightClick = finalObject;
+                    // stackPane.getChildren().remove(finalObject);
+                }
+            });
+
+
             shapes.add(object);
-            hbox.getChildren().add(object);
+
+            for(int i = 0; i < shapes.size(); i++) {
+               // System.out.println(shapes.get(i).getTranslateX());
+            }
+
+            stackPane.getChildren().add(object);
         }
     }
 
