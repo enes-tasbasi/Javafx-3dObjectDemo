@@ -2,7 +2,6 @@ package sample;
 
 import javafx.fxml.FXML;
 import javafx.scene.Cursor;
-import javafx.scene.PointLight;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.GridPane;
@@ -31,15 +30,19 @@ public class Controller {
     public TextField tf1, tf2, tf3;
 
     @FXML
-    public HBox hbox;
-
-    @FXML
     public GridPane gridPane;
 
     @FXML
     public StackPane stackPane;
 
-    public MenuItem rotateMenuItem;
+    @FXML
+    public MenuBar menuBar;
+
+    @FXML
+    public Menu fileMenu;
+
+    @FXML
+    public MenuItem closeMenuItem;
 
     public MenuItem deleteMenuItem;
 
@@ -60,7 +63,7 @@ public class Controller {
 
         contextMenu = new ContextMenu();
 
-        rotateMenuItem = new MenuItem("Rotate");
+        MenuItem rotateMenuItem = new MenuItem("Rotate");
         rotateMenuItem.setOnAction(e -> {
             TextField rotateTextField = new TextField();
             rotateTextField.setPromptText("Degrees");
@@ -88,11 +91,13 @@ public class Controller {
         deleteMenuItem.setOnAction(event -> {
 
             stackPane.getChildren().remove(currentRightClick);
+            shapes.remove(currentRightClick);
 
         });
 
         contextMenu.getItems().addAll(rotateMenuItem, deleteMenuItem);
 
+        closeMenuItem.setOnAction(event -> Main.close());
 
     }
 
