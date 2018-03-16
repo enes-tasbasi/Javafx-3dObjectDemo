@@ -936,3 +936,14 @@ VBox > .split-menu-button.last > .arrow-button {
 	-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);
 }
 
+#menuBar {
+    -fx-background-color: #ccc;
+    	-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.8), 10, 0, 0, 0);
+}
+
+#fileMenu {
+    -fx-background-color: #ccc;
+}
+
+
+

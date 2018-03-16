@@ -10,6 +10,7 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
 
+
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/sample.fxml"));
 
         Parent root = loader.load();
@@ -37,5 +38,9 @@ public class Main extends Application {
 
     public static void main(String[] args) {
         launch(args);
+    }
+
+    public static void exit() {
+        System.exit(1);
     }
 }

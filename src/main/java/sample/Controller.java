@@ -39,6 +39,21 @@ public class Controller {
     @FXML
     public StackPane stackPane;
 
+    @FXML
+    public MenuBar menuBar;
+
+    @FXML
+    public Menu fileMenu;
+
+    @FXML
+    public MenuItem closeMenuItem;
+
+    @FXML
+    public MenuItem saveMenuItem;
+
+    @FXML
+    public MenuItem openMenuItem;
+
     public MenuItem rotateMenuItem;
 
     public MenuItem deleteMenuItem;
@@ -51,6 +66,8 @@ public class Controller {
 
 
     public void initialize() {
+
+        // Make dimension text fields invisible by default
         tf1.setVisible(false);
         tf2.setVisible(false);
         tf3.setVisible(false);
@@ -58,8 +75,11 @@ public class Controller {
         GridPane.setConstraints(colorComboBox, 0, 1);
         GridPane.setConstraints(addButton, 0, 2);
 
+        // initialize context menu ( right-click menu )
         contextMenu = new ContextMenu();
 
+
+        // create the two menuitems that are going to be inside of the context menu
         rotateMenuItem = new MenuItem("Rotate");
         rotateMenuItem.setOnAction(e -> {
             TextField rotateTextField = new TextField();
@@ -88,33 +108,47 @@ public class Controller {
         deleteMenuItem.setOnAction(event -> {
 
             stackPane.getChildren().remove(currentRightClick);
+            shapes.remove(currentRightClick);
 
         });
 
         contextMenu.getItems().addAll(rotateMenuItem, deleteMenuItem);
 
 
+        saveMenuItem.setOnAction(event -> Utils.save(shapes));
+        openMenuItem.setOnAction(event -> {
+            ArrayList<Shape3D> shapes = Utils.open();
+            stackPane.getChildren().clear();
+            this.shapes.clear();
+
+        });
+        closeMenuItem.setOnAction(event -> Main.exit());
+
+
+
+
     }
 
     public void addShape(){
-
         Shape3D object = null;
         PhongMaterial material = new PhongMaterial();
         material.setDiffuseColor(Color.WHITE);
 
-        switch (shapeComboBox.getValue().toString()) {
-            case "Sphere":
-                object = new Sphere(Integer.parseInt(tf1.getText()));
-                break;
-            case "Cylinder":
-                object = new Cylinder(Integer.parseInt(tf1.getText()),
-                        Integer.parseInt(tf2.getText()));
-                break;
-            case "Box":
-                object = new Box(Integer.parseInt(tf3.getText()),
-                        Integer.parseInt(tf2.getText()),
-                        Integer.parseInt(tf3.getText()));
-                break;
+        if(shapeComboBox.getValue() != null) {
+            switch (shapeComboBox.getValue().toString()) {
+                case "Sphere":
+                    object = new Sphere(Integer.parseInt(tf1.getText()));
+                    break;
+                case "Cylinder":
+                    object = new Cylinder(Integer.parseInt(tf1.getText()),
+                            Integer.parseInt(tf2.getText()));
+                    break;
+                case "Box":
+                    object = new Box(Integer.parseInt(tf3.getText()),
+                            Integer.parseInt(tf2.getText()),
+                            Integer.parseInt(tf3.getText()));
+                    break;
+            }
         }
 
         if(colorComboBox.getValue() != null && shapeComboBox.getValue() != "") {
@@ -164,7 +198,7 @@ public class Controller {
                 if(e.getButton() == MouseButton.SECONDARY) {
                    contextMenu.show(finalObject, e.getScreenX(), e.getScreenY());
                    currentRightClick = finalObject;
-                    // stackPane.getChildren().remove(finalObject);
+
                 }
             });
 
